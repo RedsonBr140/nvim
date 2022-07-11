@@ -1,0 +1,46 @@
+{
+  "suggest.completionItemKindLabels": {
+    "typeParameter": "         TypeParameter   ",
+    "constructor": "         Constructor   ",
+    "enumMember": "         EnumMember   ",
+    "reference": "         Reference   ",
+    "interface": "         Interface   ",
+    "function": "         Function   ",
+    "variable": "         Variable   ",
+    "property": "        ﰠ Property   ",
+    "operator": "         Operator   ",
+    "constant": "         Constant   ",
+    "keyword": "         Keyword   ",
+    "snippet": "         Snippet   ",
+    "method": "         Method   ",
+    "struct": "        פּ Struct   ",
+    "folder": "         Folder   ",
+    "module": "         Module   ",
+    "event": "         Event   ",
+    "color": "         Color   ",
+    "class": "        ﴯ Class   ",
+    "field": "        ﰠ Field   ",
+    "value": "         Value   ",
+    "unit": "        塞 Unit   ",
+    "enum": "         Enum   ",
+    "file": "         File   ",
+    "text": "         Text   "
+  },
+  "suggest.floatConfig": {
+  "border": true
+  },
+  "hover.floatConfig": {
+  "rounded": true,
+  "border": true
+  },
+  "Lua.telemetry.enable": false,
+
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  }
+}
+
