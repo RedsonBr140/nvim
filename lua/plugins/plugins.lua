@@ -10,7 +10,11 @@ end
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-
+  config_module 'plugins.config.presence'
+  
+  use {
+    'andweeb/presence.nvim'
+  }
   -- UI Configuration
   use 'chriskempson/base16-vim'
 
@@ -28,6 +32,8 @@ return require('packer').startup(function()
   }
 
   -- Workflow helpers
+  use 'mattn/emmet-vim'
+
   use {
     "windwp/nvim-autopairs",
     config = config_module 'plugins.config.autopairs'
