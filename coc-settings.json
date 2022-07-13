@@ -33,14 +33,6 @@
   "rounded": true,
   "border": true
   },
-  "Lua.telemetry.enable": false,
+  "Lua.telemetry.enable": false
 
-  "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
-    }
-  }
 }
-
