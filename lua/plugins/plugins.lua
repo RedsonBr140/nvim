@@ -35,6 +35,14 @@ local use = require('packer').use
 			config = config_module 'plugins.config.bufferline',
 		}
 
+		use {
+			'nvim-treesitter/nvim-treesitter',
+			config = config_module 'plugins.config.treesitter',
+			run = ':TSUpdate'
+		}
+
+		use { 'NvChad/nvim-colorizer.lua', config = require('colorizer').setup() }
+
 		-- Workflow helpers
 		use 'mattn/emmet-vim'
 		use 'editorconfig/editorconfig-vim'
@@ -77,5 +85,8 @@ local use = require('packer').use
 		requires = 'rafamadriz/friendly-snippets'
 	} -- Snippets plugin
 
+	use {
+	  "ray-x/lsp_signature.nvim",
+	} -- Function args above of them.
 end)
 

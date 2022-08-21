@@ -7,6 +7,7 @@ local function setup(module)
     end
 end
 
+vim.opt.termguicolors = true
 
 setup 'plugins.plugins'
 setup 'user.mappings'
