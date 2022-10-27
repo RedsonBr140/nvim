@@ -20,6 +20,7 @@ local use = require('packer').use
 			'folke/todo-comments.nvim',
 			config = config_module 'plugins.config.todo-comments'
 		}
+		use { "ellisonleao/gruvbox.nvim" }
 		use { 'catppuccin/nvim', as = "catppuccin", config = config_module 'plugins.config.catppuccin'}
 
 		use {
@@ -47,14 +48,17 @@ local use = require('packer').use
 		use 'mattn/emmet-vim'
 		use 'editorconfig/editorconfig-vim'
 		use 'fatih/vim-go'
+
 		use {
 			'nvim-telescope/telescope.nvim', tag = '0.1.0',
 			requires = { {'nvim-lua/plenary.nvim'} },
 		}
+
 		use {
 			"windwp/nvim-autopairs",
 			config = config_module 'plugins.config.autopairs'
 		}
+
 		use {
 			'kyazdani42/nvim-tree.lua',
 			requires = 'kyazdani42/nvim-web-devicons',
@@ -66,7 +70,7 @@ local use = require('packer').use
 			'lewis6991/gitsigns.nvim',
 			config = config_module 'plugins.config.gitsigns'
 		}
-
+		use 'manzeloth/live-server'
 		-- LSP And related
 		use {
 			'neovim/nvim-lspconfig',
@@ -84,6 +88,11 @@ local use = require('packer').use
 		config = require("luasnip.loaders.from_vscode").lazy_load(),
 		requires = 'rafamadriz/friendly-snippets'
 	} -- Snippets plugin
+
+	use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+	})
 
 	use {
 	  "ray-x/lsp_signature.nvim",

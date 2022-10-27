@@ -1,6 +1,6 @@
 local lspcfg = require'lspconfig'
 
-require'lspconfig'.sumneko_lua.setup {
+lspcfg.sumneko_lua.setup {
   settings = {
     Lua = {
       runtime = {
@@ -24,9 +24,40 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 lspcfg.gopls.setup{}
+
+lspcfg.vuels.setup{
+	settings = {
+		vetur = {
+			completion = {
+				autoImport = true,
+				useScaffoldSnippets = true
+			},
+			format = {
+				defaultFormatter = {
+					html = "none",
+					js = "prettier",
+					css = "prettier"
+				}
+			},
+			validation = {
+				script = true,
+				style = true,
+				template = true
+			}
+		}
+	}
+}
+
+lspcfg.html.setup{
+	cmd = { "vscode-html-languageserver", "--stdio" }
+}
+
+lspcfg.rust_analyzer.setup{}
+
 require'lsp_signature'.setup({
 	bind = true,
 	handler_opts = {
 		border = "rounded"
 	},
 })
+

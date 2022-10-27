@@ -1,5 +1,5 @@
 local set = vim.opt
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd [[colorscheme gruvbox]]
 vim.cmd [[set fcs=eob:\ ]]
 set.tabstop = 2
 set.shiftwidth = 2
