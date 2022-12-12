@@ -1,5 +1,5 @@
 local lspcfg = require'lspconfig'
-
+autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 lspcfg.sumneko_lua.setup {
   settings = {
     Lua = {
@@ -23,6 +23,7 @@ lspcfg.sumneko_lua.setup {
   },
 }
 
+lspcfg.tsserver.setup{}
 lspcfg.gopls.setup{}
 
 lspcfg.vuels.setup{
