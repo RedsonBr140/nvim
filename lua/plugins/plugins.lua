@@ -1,101 +1,124 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
+
+
 local function config_module(path)
-			local module_status_ok, module = pcall(require, path)
-
-			if module_status_ok then
-					return module
-			else
-					return nil
-			end
+	local module_status_ok, module = pcall(require, path)
+	if module_status_ok then
+		return module
+	else
+		return nil
 	end
-local use = require('packer').use
-	return require('packer').startup(function()
-		use 'wbthomason/packer.nvim'
+end
 
-		use {
-			'andweeb/presence.nvim',
-			config = config_module 'plugins.config.presence'
-		}
-		-- UI Configuration
-		use {
-			'folke/todo-comments.nvim',
-			config = config_module 'plugins.config.todo-comments'
-		}
-		use { "ellisonleao/gruvbox.nvim" }
-		use { 'catppuccin/nvim', as = "catppuccin", config = config_module 'plugins.config.catppuccin'}
+require('lazy').setup({
+	{
+	 'andweeb/presence.nvim',
+	 config = function ()
+		config_module 'plugins.config.presence'
+	end,
+	},
+	-- UI Configuration
+	"ellisonleao/gruvbox.nvim",
+	{
+	 'folke/todo-comments.nvim',
+	 config = function()
+		config_module 'plugins.config.todo-comments'
+	 end
+	},
+	{
+	 'nvim-lualine/lualine.nvim',
+	 dependencies = 'kyazdani42/nvim-web-devicons',
+	 config = function ()
+		config_module('plugins.config.lualine')
+	end,
+	},
+	{
+	 'akinsho/bufferline.nvim',
+	 dependencies = {'kyazdani42/nvim-web-devicons'},
+	 version = "v2.*",
+	 config  = function()
+		config_module 'plugins.config.bufferline'
+	 end,
+	},
+	{
+	 'nvim-treesitter/nvim-treesitter',
+	 config = function()
+		config_module 'plugins.config.treesitter'
+	end,
+	 build = ':TSUpdate'
+	},
 
-		use {
-			'nvim-lualine/lualine.nvim',
-			requires = 'kyazdani42/nvim-web-devicons',
-			config = config_module 'plugins.config.lualine',
-		}
+	-- Workflow helpers
+	'mattn/emmet-vim',
+	'editorconfig/editorconfig-vim',
+	'fatih/vim-go',
+	'manzeloth/live-server',
 
-		use {
-			'akinsho/bufferline.nvim',
-			requires = 'kyazdani42/nvim-web-devicons',
-			tag = "v2.*",
-			config = config_module 'plugins.config.bufferline',
-		}
+	{
+	 'nvim-telescope/telescope.nvim',
+	 dependencies = 'nvim-lua/plenary.nvim',
+	},
 
-		use {
-			'nvim-treesitter/nvim-treesitter',
-			config = config_module 'plugins.config.treesitter',
-			run = ':TSUpdate'
-		}
+	{
+	 "windwp/nvim-autopairs",
+	 config = function()
+		config_module 'plugins.config.autopairs'
+	end
+	},
 
-		use { 'NvChad/nvim-colorizer.lua', config = require('colorizer').setup() }
+	{
+	 'kyazdani42/nvim-tree.lua',
+	 dependencies = {'kyazdani42/nvim-web-devicons'},
+	 version = 'nightly',
+	 config = config_module 'plugins.config.nvimtree',
+	},
 
-		-- Workflow helpers
-		use 'mattn/emmet-vim'
-		use 'editorconfig/editorconfig-vim'
-		use 'fatih/vim-go'
+	{
+	 'lewis6991/gitsigns.nvim',
+	 config = function()
+		config_module 'plugins.config.gitsigns'
+	end
+	},
 
-		use {
-			'nvim-telescope/telescope.nvim', tag = '0.1.0',
-			requires = { {'nvim-lua/plenary.nvim'} },
-		}
+	-- LSP And related
+	{
+	 'neovim/nvim-lspconfig',
+	 config = function()
+		config_module 'plugins.config.lspconfig'
+	end
+	},
 
-		use {
-			"windwp/nvim-autopairs",
-			config = config_module 'plugins.config.autopairs'
-		}
+	-- Autocomplete
+	'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
+	'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
+	'ray-x/lsp_signature.nvim', -- Function args above of them.
 
-		use {
-			'kyazdani42/nvim-tree.lua',
-			requires = 'kyazdani42/nvim-web-devicons',
-			tag = 'nightly',
-			config = config_module 'plugins.config.nvimtree',
-		}
 
-		use {
-			'lewis6991/gitsigns.nvim',
-			config = config_module 'plugins.config.gitsigns'
-		}
-		use 'manzeloth/live-server'
-		-- LSP And related
-		use {
-			'neovim/nvim-lspconfig',
-			config = config_module 'plugins.config.lspconfig'
-		}
-		-- Autocomplete
-	use {
-		'hrsh7th/nvim-cmp',
-		config = config_module 'plugins.config.autocomplete'
-	} -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-  use {
-		'L3MON4D3/LuaSnip',
-		config = require("luasnip.loaders.from_vscode").lazy_load(),
-		requires = 'rafamadriz/friendly-snippets'
-	} -- Snippets plugin
+	{
+	 'hrsh7th/nvim-cmp',
+	 config = function()
+		config_module 'plugins.config.autocomplete'
+	end
+	}, -- Autocompletion plugin
 
-	use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-	})
-
-	use {
-	  "ray-x/lsp_signature.nvim",
-	} -- Function args above of them.
-end)
-
+	{
+	 'L3MON4D3/LuaSnip',
+	 dependencies = 'rafamadriz/friendly-snippets',
+	 config = function()
+		require("luasnip.loaders.from_vscode").lazy_load()
+	 end
+	}, -- Snippets plugin
+})

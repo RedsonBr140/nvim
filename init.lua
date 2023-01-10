@@ -12,5 +12,3 @@ vim.opt.termguicolors = true
 setup 'plugins.plugins'
 setup 'user.mappings'
 setup 'user.options'
-
-
