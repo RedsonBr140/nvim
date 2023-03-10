@@ -1,5 +1,6 @@
-local lspcfg = require'lspconfig'
-autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+local lspcfg = require("lspconfig")
+
+--[[
 lspcfg.sumneko_lua.setup {
   settings = {
     Lua = {
@@ -21,10 +22,15 @@ lspcfg.sumneko_lua.setup {
       },
     },
   },
-}
+}--]]
 
+lspcfg.clangd.setup{
+	cmd = "clangd-15",
+}
 lspcfg.tsserver.setup{}
 lspcfg.gopls.setup{}
+
+autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 
 lspcfg.vuels.setup{
 	settings = {
