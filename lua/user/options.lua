@@ -6,8 +6,8 @@ set.shiftwidth = 4
 set.expandtab = true
 
 -- See whether it's using tabs or spaces.
-set.list=true
-set.listchars="tab:» ,trail:·"
+set.list = true
+set.listchars = "tab:» ,trail:·"
 
 set.number = true
 set.mouse = 'a'

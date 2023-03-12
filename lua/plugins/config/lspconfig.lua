@@ -1,7 +1,13 @@
 local lspcfg = require("lspconfig")
 
---[[
-lspcfg.sumneko_lua.setup {
+lspcfg.clangd.setup{
+	cmd = "clangd",
+}
+lspcfg.tsserver.setup{}
+lspcfg.gopls.setup{}
+lspcfg.asm_lsp.setup{}
+
+lspcfg.lua_ls.setup {
   settings = {
     Lua = {
       runtime = {
@@ -10,7 +16,7 @@ lspcfg.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
+        globals = {'vim'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -22,13 +28,7 @@ lspcfg.sumneko_lua.setup {
       },
     },
   },
-}--]]
-
-lspcfg.clangd.setup{
-	cmd = "clangd-15",
 }
-lspcfg.tsserver.setup{}
-lspcfg.gopls.setup{}
 
 autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 
